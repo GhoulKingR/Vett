@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Sign up - {{ app_name }}
+{% endblock %}
+
+{% block customstyle %}
+  <style>
+    .signup_container {
+      width: 100%;
+      height: calc(100vh - 70px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .signup_form {
+      width: 740px;
+      height: 277px;
+      flex-shrink: 0;
+      align-items: center;
+      display: flex;
+    }
+
+    .signup_form > p {
+      color: #000;
+      font-family: Inria Serif;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      width: 214px;
+      margin-right: 31px;
+    }
+
+    .signup_form > form {
+      padding-left: 80px;
+      border-left: 1px solid black;
+    }
+
+    .signup_form > form > input {
+      width: 415px;
+      height: 61px;
+      flex-shrink: 0;
+      border-radius: 11px;
+      border: 2px solid #000;
+      background: #FFF;
+      padding: 17px;
+      font-family: Istok Web;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: 48px;
+    }
+
+    .signup_form > form > button {
+      width: 415px;
+      height: 61px;
+      flex-shrink: 0;
+      border-radius: 11px;
+      border: 2px solid #000;
+      background: #000;
+      color: #FFF;
+      font-family: Istok Web;
+      font-size: 19px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="signup_container">
+
+    <div class="signup_form">
+      <p>Create an account</p>
+      <form action="/auth/signup/go" method="post">
+
+        {% if error %}
+          <input type="text" name="username" class="error-input" placeholder="Profile name..."><br>
+          <div class="error">{{ error }}</div>
+          {% else %}
+          <input type="text" name="username" placeholder="Profile name..."><br>
+          {% endif %}
+          
+          <input type="password" name="password" placeholder="Profile password..."><br>
+        <button type="submit">Create your account</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block rightside %}
+  <div class="rightside">
+    <a href="/auth/login">Log in</a>
+  </div>
+{% endblock %}

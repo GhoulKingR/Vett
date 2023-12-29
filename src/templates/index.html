@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ app_name }}
+{% endblock %}
+
+{% block customstyle %}
+  <style>
+    .index_username {
+      width: 610px;
+      height: 275px;
+      flex-shrink: 0;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      max-width: 500px;
+      margin-top: 100px;
+      margin-bottom: 100px;
+    }
+
+    .index_username h1 {
+      width: 322px;
+      color: #000;
+      font-family: Inria Serif;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-right: 61px;
+    }
+
+    .index_username p {
+      width: 186px;
+      color: #000;
+      font-family: Istok Web;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      padding: 41px;
+      padding-right: 0;
+      border-left: 1px solid black;
+    }
+
+    .index_createBoard {
+      width: 850px;
+      height: 431px;
+      flex-shrink: 0;
+      margin: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .index_createBoard > h1 {
+      color: #000;
+      font-family: 'Inria Serif';
+      font-size: 29px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-right: 44px;
+    }
+    
+    .index_createBoard > form {
+      padding-left: 56px;
+      border-left: 1px solid black;
+      font-family: 'Istok Web';
+    }
+
+    .index_createBoard > form > input {
+      width: 415px;
+      height: 61px;
+      flex-shrink: 0;
+      border-radius: 11px;
+      border: 2px solid #000;
+      background: #FFF;
+      padding: 17px;
+      margin-bottom: 33px;
+    }
+
+    .index_createBoard > form > textarea {
+      width: 415px;
+      height: 202px;
+      flex-shrink: 0;
+      resize: none;
+      border-radius: 11px;
+      border: 2px solid #000;
+      background: #FFF;
+      padding: 17px;
+      margin-bottom: 16px;
+    }
+
+    .index_createBoard > form > button {
+      width: 415px;
+      height: 61px;
+      flex-shrink: 0;
+      border-radius: 11px;
+      border: 2px solid #000;
+      background: #000;
+      color: #FFF;
+      font-family: Istok Web;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      margin-top: 28px;
+    }
+    
+    .p_boards {
+      color: #000;
+      font-family: Inria Serif;
+      font-size: 38px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-top: 31px;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    {% if username %}
+      <div class="index_username">
+        <h1>Welcome {{ username }}!</h1>
+        <p>
+          Here you’ll can find and create boards. You can even be as anonymous as you want to be here.
+        </p>
+      </div>
+
+      <div class="index_createBoard">
+        <h1>
+          Create a new board
+        </h1>
+        <form method="post" action="/create-board">
+          <input type="text" name="name" placeholder="Board name..." required/><br>
+          <textarea name="description" placeholder="Board description..." required></textarea><br>
+          <div>
+            <input type="checkbox" name="invite-only"> don't list in public boards
+          </div>
+          <button type="submit">Create board</button>
+        </form>
+    
+        {% if error %}
+          <div class="error">{{ error }}</div>
+        {% endif %}
+      </div>
+    {% else %}
+      <div class="index_username">
+        <h1>Welcome to {{ app_name }}!</h1>
+        <p>
+          Here you’ll can find and create boards. You can even be as anonymous as you want to be here.
+        </p>
+      </div>
+    {% endif %}
+
+    <h2 class="p_boards">Public boards</h2>
+    <div class="line"></div>
+    {% for board in boards %}
+      <div>
+        <a href="/boards/{{ board.name }}">{{ board.name }}</a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block rightside %}
+  <div class="rightside">
+    {% if username %}
+      <a href="/auth/logout">Log out</a>
+    {% else %}
+      <a href="/auth/login">Log in</a>
+      <span> | </span>
+      <a href="/auth/signup">Sign up</a>
+    {% endif %}
+  </div>
+{% endblock %}

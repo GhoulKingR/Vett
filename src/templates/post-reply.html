@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form > input {
+            width: 415px;
+            flex-shrink: 0;
+            border-radius: 11px;
+            border: 2px solid #000;
+            background: #FFF;
+            padding: 15px;
+            padding-left: 18px;
+            padding-right: 18px;
+            margin-bottom: 14px;
+        }
+
+        form > select {
+            margin-top: 13px;
+            width: 455px;
+            height: 61px;
+            flex-shrink: 0;
+            color: #000;
+            font-family: Istok Web;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            border-radius: 11px;
+            border: 2px solid #000;
+            background: #FFF;
+            padding: 15px;
+            padding-left: 18px;
+            padding-right: 18px;
+            margin-bottom: 34px;
+        }
+
+        form > button {
+            width: 455px;
+            height: 61px;
+            flex-shrink: 0;
+            border-radius: 11px;
+            border: 2px solid #000;
+            background: #000;
+            color: #FFF;
+            font-family: 'Istok Web';
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+    </style>
+</head>
+<body>
+    <form action="{{ url }}" method="post">
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+        <input type="text" name="message" placeholder="Reply..." required/>
+        as
+        <select name="user">
+            {% if username %}
+                <option value="{{ username }}">{{ username }}</option>
+            {% endif %}
+            <option value="Anonymous">Anonymous</option>
+        </select>
+        <button type="submit">Post</button>
+    </form>
+</body>
+</html>

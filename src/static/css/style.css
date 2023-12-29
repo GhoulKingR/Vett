@@ -1,0 +1,63 @@
+.error {
+  color: red;
+}
+
+@font-face {
+  font-family: 'Imperial Script';
+  src: url('/static/fonts/Imperial_Script/ImperialScript-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Inria Serif';
+  src: url('/static/fonts/Inria_Serif/InriaSerif-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Istok Web';
+  src: url('/static/fonts/Istok_Web/IstokWeb-Regular.ttf');
+}
+
+.error-input {
+  border-color: red;
+  outline: none;
+}
+
+header {
+  width: 100vw;
+  height: 70px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: #f4f4f4;
+}
+
+header .internals {
+  height: 100%;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  color: #000;
+}
+
+header .app_name:hover {
+  text-decoration: none;
+}
+
+header .rightside {
+  font-family: 'Inria Serif';
+}
+
+header a {
+  color: #000 !important;
+}
+
+header h1 {
+  font-family: 'Imperial Script';
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background: #000;
+}

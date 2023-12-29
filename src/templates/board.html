@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ board_name }} - {{ app_name }}
+{% endblock %}
+
+{% block customstyle %}
+  <style>
+    .welcome {
+      color: #000;
+      font-family: Inria Serif;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: 24px;
+      margin-top: 55px;
+    }
+
+    .description {
+      color: #000;
+      font-family: Istok Web;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: 64px;
+    }
+
+    .created-in {
+      color: #000;
+      font-family: Istok Web;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      width: 100%;
+      text-align: right;
+    }
+
+    .make-post {
+      width: 740px;
+      height: 431px;
+      flex-shrink: 0;
+      margin-top: 55px;
+      display: flex;
+      align-items: center;
+    }
+
+    .make-post > p {
+      color: #000;
+      font-family: Inria Serif;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-right: 37px;
+    }
+
+    .make-post > .inputs {
+      padding-left: 80px;
+      border-left: 1px solid black;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .make-post > .inputs > textarea {
+      width: 415px;
+      height: 202px;
+      flex-shrink: 0;
+      resize: none;
+      border-radius: 11px;
+      border: 2px solid #000;
+      background: #FFF;
+      padding: 17px;
+      font-family: Istok Web;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: 33px;
+    }
+
+    .make-post > .inputs > select {
+      width: 415px;
+      height: 61px;
+      flex-shrink: 0;
+      margin-top: 10px;
+      border-radius: 11px;
+      border: 2px solid #000;
+      background: #FFF;
+      color: #000;
+      font-family: Istok Web;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      padding: 17px;
+      margin-bottom: 34px;
+    }
+
+    .make-post > .inputs > button {
+      width: 415px;
+      height: 61px;
+      flex-shrink: 0;
+      border-radius: 11px;
+      border: 2px solid #000;
+      background: #000;
+      color: #FFF;
+      font-family: Istok Web;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    .post-head {
+      color: #000;
+      font-family: Inria Serif;
+      font-size: 44px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-top: 55px;
+    }
+
+    .line {
+      margin-bottom: 26px;
+    }
+
+    .post > .head {
+      width: 100%;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: space-between;
+      padding-left: 9px;
+      padding-right: 9px;
+      padding-top: 13px;
+      padding-bottom: 13px;
+      background: #F4F4F4;
+      color: #000;
+      font-family: Inria Serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: 12px;
+      margin-top: 23px;
+    }
+
+    .post > .content {
+      width: 100%;
+      flex-shrink: 0;
+      display: flex;
+      padding-left: 9px;
+    }
+
+    .post > .content > .reply-replies {
+      display: flex;
+      border-left: 1px solid black;
+      padding-left: 43px;
+      flex-grow: 1;
+      flex-direction: column;
+    }
+
+    .post > .content > .reply-replies > p > a {
+      color: #000;
+      font-family: Istok Web;
+      font-size: 13px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    .post > .content > p {
+      color: #000;
+      font-family: Istok Web;
+      font-size: 13px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-right: 133px;
+      width: 204px;
+    }
+
+    .post > .content > .reply-replies > iframe {
+      width: 100%;
+      height: 150px;
+      flex-grow: 1;
+    }
+
+    body {
+      margin-bottom: 20px;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    {% if username %}
+      <h1 class="welcome">Welcome to {{ board_name }}, {{ username }}!</h1>
+    {% else %}
+      <h1 class="welcome">Welcome to {{ board_name }}!</h1>
+    {% endif %}
+
+    <p class="description">
+      {{ description }}
+    </p>
+
+    <p class="created-in">
+      Created in {{ creation_time }}
+    </p>
+
+    {% if is_private %}
+      <p>
+        This board is private: That means, it won't show up in the public board,
+        The only way to access it is through the link directly. Aside that, it is
+        more or less the same as a public board.
+      </p>
+    {% endif %}
+      
+    <form action="/post/{{ board_name }}" method="post" class="make-post">
+      <p>
+        Make a post
+      </p>
+      <div class="inputs">
+        <textarea type="text" name="message" placeholder="Post content..." required> </textarea>
+        as
+        <select name="user">
+          {% if username %}
+            <option value="{{ username }}">{{ username }}</option>
+          {% endif %}
+          <option value="Anonymous">Anonymous</option>
+        </select>
+        <button type="submit">Post</button>
+        {% if error %}
+          <br>
+          <div class="error">{{ error }}</div>
+        {% endif %}
+      </div>
+    </form>
+
+    <h2 class="post-head">Posts</h2>
+    <div class="line"></div>
+    {% for post in posts %}
+      <div class="post">
+        <div class="head">
+          <div>{{ post.from }}</div>
+          <div>{{ post.time }}</div>
+        </div>
+        <div class="content">
+          <p>{{ post.content }}</p>
+          <div class="reply-replies">
+            <p>
+              <a href="/boards/{{ board_name }}/{{ post.id }}/reply" target="posttabs{{ post.id }}" rel="noreferer">Reply</a>
+              <span> | </span>
+              <a href="/boards/{{ board_name }}/{{ post.id }}/replies" target="posttabs{{ post.id }}" rel="noreferer">Replies</a>
+            </p>
+            <iframe src="/boards/{{ board_name }}/{{ post.id }}/replies" frameborder="0" name="posttabs{{ post.id }}"></iframe>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block rightside %}
+  <div class="rightside">
+    {% if username %}
+      <a href="/auth/logout">Log out</a>
+    {% else %}
+      <a href="/auth/login">Log in</a>
+      <span> | </span>
+      <a href="/auth/signup">Sign up</a>
+    {% endif %}
+  </div>
+{% endblock %}
