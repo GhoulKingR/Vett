@@ -18,17 +18,22 @@ To run this bot, follow these steps:
 git clone https://github.com/GhoulKingR/Vett.git
 ```
 
-2. Install it's dependencies:
+2. Enter into the project directory:
+```bash
+cd Vett
+```
+
+3. Install project's dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Enter into the `src` directory:
+4. Enter into the `src` directory:
 ```bash
 cd src
 ```
 
-3. Run the program
+5. Run the program
 ```bash
 python app.py
 
