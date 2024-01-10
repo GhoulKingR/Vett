@@ -15,7 +15,7 @@ To run this bot, follow these steps:
 
 1. Clone the repository into your system
 ```bash
-git clone https://github.com/GhoulKingR/vett.git
+git clone https://github.com/GhoulKingR/Vett.git
 ```
 
 2. Install it's dependencies:
