@@ -8,7 +8,6 @@ Vett is a board site for creating boards, posting in the boards and interacting 
 To run this bot on your system, you need the following:
 * Python v3 interpreter
 * Pip
-* Chrome browser
 
 ## Runnning the bot
 
@@ -16,7 +15,7 @@ To run this bot, follow these steps:
 
 1. Clone the repository into your system
 ```bash
-git clone https://github.com/GhoulKingR/anime-bot.git
+git clone https://github.com/GhoulKingR/vett.git
 ```
 
 2. Install it's dependencies:
@@ -24,9 +23,18 @@ git clone https://github.com/GhoulKingR/anime-bot.git
 pip install -r requirements.txt
 ```
 
-3. Run the bot
+3. Enter into the `src` directory:
 ```bash
-python src/anime-bot
+cd src
+```
+
+3. Run the program
+```bash
+python app.py
+
+# or 
+
+flask run
 ```
 
 ## Bugs/Request
